@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var cliente_1 = require("../models/cliente");
+var contaCorrente_1 = require("../models/contaCorrente");
+var cliente03 = new cliente_1.Cliente('098.099.888-98', 'Augusto', '77899967-7898', false, new contaCorrente_1.ContaCorrente("5000-01"));
+console.log(cliente03.conta.depositar(100));
+console.log(cliente03.conta.depositar(100));
+console.log(cliente03.conta.depositar(100));
+console.log(cliente03.conta.sacar(50));
+console.log(cliente03.conta.calcularSaldo());

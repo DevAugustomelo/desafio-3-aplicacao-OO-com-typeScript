@@ -1,0 +1,24 @@
+
+
+
+
+
+
+instalação:
+
+com node.js instalado digite no terminal 
+
+instalação global
+npm i -g typescript
+
+
+saber a versão:
+tsc -v 
+
+criar arquivo de configuração tsconfig.json
+tsc --init
+
+
+transpilação automática
+tsc -w
+
