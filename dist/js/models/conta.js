@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Conta = void 0;
-var credito_1 = require("./credito");
 var Conta = (function () {
     function Conta(numero) {
         this._creditos = [];
@@ -29,14 +28,11 @@ var Conta = (function () {
         enumerable: false,
         configurable: true
     });
-    Conta.prototype.depositar = function (valor) {
-        this.creditos.push(new credito_1.Credito(valor, new Date()));
-        return "Valor de ".concat(valor, " Creditado.");
-    };
+    Conta.prototype.depositar = function (valor) { };
     Conta.prototype.sacar = function (valor) { };
-    Conta.prototype.calcularSaldo = function () { };
-    Conta.prototype.transferir = function (conta, valor) { };
-    Conta.prototype.calcularRendimento = function (dataInicial, dataFinal) { };
+    Conta.prototype.mostrarAlert = function (msg) {
+        return console.log(msg);
+    };
     return Conta;
 }());
 exports.Conta = Conta;

@@ -20,11 +20,22 @@ let cliente = new Cliente('444.555.666.70', 'Matheus', '99999999999', false, [ne
 
 let conta = cliente.conta[0] as ContaPoupanca;
 
-conta.depositar(400);
+conta.depositarCP(200, new Date('01/05/2022'));
+conta.depositarCP(200, new Date('02/05/2022'));
+conta.depositarCP(200, new Date('03/05/2022'));
+conta.depositarCP(200, new Date('04/05/2022'));
+conta.depositarCP(200, new Date('05/05/2022'));
+conta.depositarCP(200, new Date('06/05/2022'));
+conta.depositarCP(200, new Date('07/05/2022'));
+conta.depositarCP(200, new Date('08/05/2022'));
+conta.depositarCP(200, new Date('09/05/2022'));
+conta.depositarCP(200, new Date('10/05/2022'));
+conta.depositarCP(200, new Date('11/05/2022'));
+conta.depositarCP(200, new Date('12/05/2022'));
 
-console.log(conta);
+conta.sacarCP(100, new Date('03-05-2022'));
+conta.sacarCP(200, new Date('07-08-2022'));
 
 
-
-
+console.log(conta.calcularRendimento() + conta.calcularSaldo());
 

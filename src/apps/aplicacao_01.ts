@@ -22,7 +22,9 @@ let mostrarCargoAtual = function(nome: Funcionario) {
     nome.cargo.forEach(e => {
         result = e.nome;
 
-    }); return result
+    }); 
+    
+    return result;
 }
 
 

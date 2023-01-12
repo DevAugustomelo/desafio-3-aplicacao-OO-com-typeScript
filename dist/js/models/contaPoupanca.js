@@ -36,26 +36,26 @@ var ContaPoupanca = (function (_super) {
     });
     ContaPoupanca.prototype.depositar = function (valor) {
         this.creditos.push(new credito_1.Credito(valor, new Date()));
-        return "Valor de ".concat(valor, " creditado na conta Poupan\u00E7a ").concat(this.numero);
+        this.mostrarAlert("Valor de ".concat(valor, " creditado na conta Poupan\u00E7a ").concat(this.numero));
     };
-    ContaPoupanca.prototype.sacar = function (valor) {
+    ContaPoupanca.prototype.depositarCP = function (valor, data) {
+        this.creditos.push(new credito_1.Credito(valor, data));
+        this.mostrarAlert("Valor de ".concat(valor, " creditado na conta Poupan\u00E7a ").concat(this.numero));
+    };
+    ContaPoupanca.prototype.sacarCP = function (valor, data) {
         var saldo = this.calcularSaldo();
         if (valor > saldo) {
-            return "Saldo indispon\u00EDvel. Saldo atual: ".concat(this.calcularSaldo(), " ");
+            this.mostrarAlert("Saldo indispon\u00EDvel ");
         }
         else {
-            this.debitos.push(new debito_1.Debito(valor, new Date()));
-            return 'Saque efetuado da Poupança com sucesso.';
+            this.debitos.push(new debito_1.Debito(valor, data));
+            this.mostrarAlert('Saque da Poupança efetuado com sucesso.');
         }
     };
-    ContaPoupanca.prototype.calcularRendimento = function (dataInicial, dataFinal) {
-        var rendimento = 0;
-        this.creditos.forEach(function (e) {
-            if (e.data >= dataInicial && e.data <= dataFinal) {
-                rendimento += e.valor;
-            }
-        });
-        return console.log(rendimento);
+    ContaPoupanca.prototype.calcularRendimento = function () {
+        var saldo = this.calcularSaldo();
+        var rendimento = saldo * this.rentabilidadeMensal;
+        return rendimento;
     };
     ContaPoupanca.prototype.calcularSaldo = function () {
         var saldoTotal = 0;
@@ -66,6 +66,10 @@ var ContaPoupanca = (function (_super) {
             saldoTotal -= e.valor;
         });
         return saldoTotal;
+    };
+    ContaPoupanca.prototype.mostrarSaldo = function () {
+        var saldo = this.calcularSaldo();
+        this.mostrarAlert(" Saldo da Conta Poupan\u00E7a n\u00BA ".concat(this.numero, " Atualizado: ").concat(saldo));
     };
     return ContaPoupanca;
 }(conta_1.Conta));

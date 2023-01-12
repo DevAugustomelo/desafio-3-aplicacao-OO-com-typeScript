@@ -22,8 +22,6 @@ var Cliente = (function (_super) {
     function Cliente(_cpf, _nome, _telefone, vip, conta) {
         var _this = _super.call(this, _cpf, _nome, _telefone) || this;
         _this._endereco = [];
-        _this._contasCorrentes = [];
-        _this._contasPoupancas = [];
         _this._vip = vip;
         _this._conta = conta;
         return _this;
@@ -45,8 +43,6 @@ var Cliente = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Cliente.prototype.acessarConta = function (numero) {
-    };
     Object.defineProperty(Cliente.prototype, "endereco", {
         get: function () {
             return this._endereco;
@@ -54,6 +50,9 @@ var Cliente = (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Cliente.prototype.addConta = function (newConta) {
+        this._conta.push(newConta);
+    };
     Cliente.prototype.addEndereco = function (newEndereco) {
         this._endereco.push(newEndereco);
     };

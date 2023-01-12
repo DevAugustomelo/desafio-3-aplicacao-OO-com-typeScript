@@ -34,47 +34,51 @@ var ContaCorrente = (function (_super) {
         get: function () {
             return this._limite;
         },
+        set: function (valor) {
+            this._limite = valor;
+        },
         enumerable: false,
         configurable: true
     });
     ContaCorrente.prototype.depositar = function (valor) {
         this.creditos.push(new credito_1.Credito(valor, new Date()));
-        this._limite += valor;
-        return "Valor de ".concat(valor, " Creditado na conta Corrente ").concat(this.numero, ".");
+        this.mostrarAlert("Valor de ".concat(valor, " Creditado na conta Corrente ").concat(this.numero, "."));
     };
     ContaCorrente.prototype.sacar = function (valor) {
-        if (valor > this._limite) {
-            return "Saldo indispon\u00EDvel. ".concat(this.calcularSaldo());
+        var saldo = this.calcularSaldo();
+        if (valor > saldo + this._limite) {
+            this.mostrarAlert('Saldo indisponível.');
         }
         else {
             this.debitos.push(new debito_1.Debito(valor, new Date()));
-            this._limite -= valor;
-            return 'Saque efetuado com sucesso.';
+            this.mostrarAlert('Saque efetuado com sucesso.');
         }
         ;
     };
     ContaCorrente.prototype.transferir = function (conta, valor) {
-        if (valor > this._limite) {
-            return "Saldo indispon\u00EDvel para tranfer\u00EAncia. ".concat(this.calcularSaldo());
+        var saldo = this.calcularSaldo();
+        if (valor > saldo + this._limite) {
+            this.mostrarAlert("Saldo indispon\u00EDvel para tranfer\u00EAncia.");
         }
         else {
             this.debitos.push(new debito_1.Debito(valor, new Date()));
-            this._limite -= valor;
             conta.creditos.push(new credito_1.Credito(valor, new Date()));
-            return "Transfer\u00EAncia no valor de ".concat(valor, " efetuada para conta ").concat(conta.numero);
+            this.mostrarAlert("Transfer\u00EAncia no valor de R$ ".concat(valor, " efetuada para conta ").concat(conta.numero));
         }
     };
     ContaCorrente.prototype.calcularSaldo = function () {
-        var somaCreditos = 0;
+        var saldo = 0;
         this.creditos.forEach(function (e) {
-            somaCreditos += e.valor;
+            saldo += e.valor;
         });
-        var somaDebitos = 0;
         this.debitos.forEach(function (e) {
-            somaDebitos += e.valor;
+            saldo -= e.valor;
         });
-        var saldo = somaCreditos - somaDebitos;
-        return " Saldo da Conta Corrente n\u00BA ".concat(this.numero, " Atualizado: ").concat(saldo, "\n Limite de saque dispon\u00EDvel: ").concat(this._limite);
+        return saldo;
+    };
+    ContaCorrente.prototype.mostrarSaldo = function () {
+        var saldo = this.calcularSaldo();
+        this.mostrarAlert(" Saldo da Conta Corrente n\u00BA ".concat(this.numero, " Atualizado: ").concat(saldo, "\n Limite da conta: ").concat(this._limite));
     };
     return ContaCorrente;
 }(conta_1.Conta));
