@@ -33,11 +33,6 @@ export abstract class Conta {
 
     public sacar(valor: number) {}
 
-    public calcularSaldo() {}
-
-    public transferir(conta: Conta, valor: number) {}
-
-    public calcularRendimento(dataInicial: string, dataFinal: string) {}
 
 
 }

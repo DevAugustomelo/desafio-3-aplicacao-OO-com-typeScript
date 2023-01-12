@@ -23,9 +23,9 @@ export class ContaCorrente extends Conta {
         return this._limite;
     }
 
-    // public set limite(valor: number) {
-    //     this._limite = valor;
-    // } 
+    public set limite(valor: number) {
+        this._limite = valor;
+    } 
 
 
     public depositar(valor: number) {
