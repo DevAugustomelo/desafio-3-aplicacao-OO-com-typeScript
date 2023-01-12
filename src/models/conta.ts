@@ -30,6 +30,10 @@ export abstract class Conta {
 
     public sacar(valor: number) {}
 
+    public mostrarAlert(msg:string): void{
+        return console.log(msg);
+    }
+
 
 
 

@@ -27,11 +27,6 @@ export class ContaCorrente extends Conta {
         this._limite = valor;
     }
     
-    
-    public mostrarAlert(msg:string): void{
-        return console.log(msg);
-    }
-
 
     public depositar(valor: number) {
         this.creditos.push(new Credito(valor, new Date()));
@@ -60,24 +55,22 @@ export class ContaCorrente extends Conta {
         }else {
             this.debitos.push(new Debito(valor, new Date()));
             conta.creditos.push(new Credito(valor, new Date()));
-            this.mostrarAlert(`Transferência no valor de ${valor} efetuada para conta ${conta.numero}`);
+            this.mostrarAlert(`Transferência no valor de R$ ${valor} efetuada para conta ${conta.numero}`);
         }
 
     }
 
     public calcularSaldo() {
 
-        let somaCreditos: number = 0;
+        let saldo: number = 0;
         this.creditos.forEach(e =>{
-            somaCreditos += e.valor
+            saldo += e.valor;
         });
 
-        let somaDebitos: number = 0;
         this.debitos.forEach(e =>{
-            somaDebitos += e.valor
+            saldo -= e.valor;
         });
 
-        const saldo: number = somaCreditos - somaDebitos;
         return saldo;
     }
 
@@ -85,7 +78,7 @@ export class ContaCorrente extends Conta {
     public mostrarSaldo() {
         let saldo = this.calcularSaldo();
         this.mostrarAlert(
-            ` Saldo da Conta Corrente nº ${this.numero} Atualizado: ${saldo}\n Limite da conta: ${this._limite}`)
+            ` Saldo da Conta Corrente nº ${this.numero} Atualizado: ${saldo}\n Limite da conta: ${this._limite}`);
     }
 }
 

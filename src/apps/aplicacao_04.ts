@@ -35,6 +35,5 @@ contaCC.transferir(contaCP, 500);
 
 contaCC.mostrarSaldo();
 
-
-console.log("Saldo em conta Poupança: ", contaCP.calcularSaldo());
+contaCP.mostrarSaldo();
 

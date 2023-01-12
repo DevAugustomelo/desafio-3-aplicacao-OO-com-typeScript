@@ -17,7 +17,7 @@ import { Endereco } from "../models/endereco";
 
 
 let cliente = new Cliente('098.099.888-98', 'Augusto', '77899967-7898', false,
- new ContaCorrente("5000-01",900))
+ [new ContaCorrente("5000-01",900)]);
 
 
 

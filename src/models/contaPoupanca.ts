@@ -21,20 +21,20 @@ export class ContaPoupanca extends Conta {
 
     
     public depositar(valor: number) {
-        this.creditos.push(new Credito(valor, new Date()))
-        return `Valor de ${valor} creditado na conta Poupança ${this.numero}`
+        this.creditos.push(new Credito(valor, new Date()));
+        this.mostrarAlert (`Valor de ${valor} creditado na conta Poupança ${this.numero}`);
         
     }
 
 
     public sacar(valor: number) {
 
-        let saldo = this.calcularSaldo()
+        let saldo = this.calcularSaldo();
         if(valor > saldo) {
-            return `Saldo indisponível. Saldo atual: ${this.calcularSaldo()} `
+            this.mostrarAlert(`Saldo indisponível `);
         }else {
-            this.debitos.push(new Debito(valor, new Date()))
-            return 'Saque efetuado da Poupança com sucesso.'
+            this.debitos.push(new Debito(valor, new Date()));
+            this.mostrarAlert('Saque da Poupança efetuado com sucesso.');
         }
         
         
@@ -65,6 +65,11 @@ export class ContaPoupanca extends Conta {
         })
 
         return saldoTotal        
+    }
+
+    public mostrarSaldo() {
+        let saldo = this.calcularSaldo();
+        this.mostrarAlert(` Saldo da Conta Poupança nº ${this.numero} Atualizado: ${saldo}`);
     }
 
 }
