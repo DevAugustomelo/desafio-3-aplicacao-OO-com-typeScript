@@ -25,36 +25,42 @@ export class ContaCorrente extends Conta {
 
     public set limite(valor: number) {
         this._limite = valor;
-    } 
+    }
+    
+    
+    public mostrarAlert(msg:string): void{
+        return console.log(msg);
+    }
 
 
     public depositar(valor: number) {
-        this.creditos.push(new Credito(valor, new Date()))
-        this._limite += valor;
-        return `Valor de ${valor} Creditado na conta Corrente ${this.numero}.`
+        this.creditos.push(new Credito(valor, new Date()));
+        this.mostrarAlert(`Valor de ${valor} Creditado na conta Corrente ${this.numero}.`);
     }
 
 
     public sacar(valor: number) {
 
-        if(valor > this._limite) {
-            return `Saldo indisponível. ${this.calcularSaldo()}`
+        let saldo = this.calcularSaldo();
+
+        if(valor > saldo + this._limite) {
+            this.mostrarAlert('Saldo indisponível.');
         }else{
-            this.debitos.push(new Debito(valor, new Date()))
-            this._limite -= valor;
-            return 'Saque efetuado com sucesso.'
+            this.debitos.push(new Debito(valor, new Date()));
+            this.mostrarAlert('Saque efetuado com sucesso.');
         };     
     }
 
     public transferir(conta: Conta, valor: number){
 
-        if(valor > this._limite) {
-            return `Saldo indisponível para tranferência. ${this.calcularSaldo()}`
+        let saldo = this.calcularSaldo();
+
+        if(valor > saldo + this._limite) {
+            this.mostrarAlert(`Saldo indisponível para tranferência.`);
         }else {
-            this.debitos.push(new Debito(valor, new Date()))
-            this._limite -= valor
-            conta.creditos.push(new Credito(valor, new Date()))
-            return `Transferência no valor de ${valor} efetuada para conta ${conta.numero}`
+            this.debitos.push(new Debito(valor, new Date()));
+            conta.creditos.push(new Credito(valor, new Date()));
+            this.mostrarAlert(`Transferência no valor de ${valor} efetuada para conta ${conta.numero}`);
         }
 
     }
@@ -72,8 +78,14 @@ export class ContaCorrente extends Conta {
         });
 
         const saldo: number = somaCreditos - somaDebitos;
+        return saldo;
+    }
 
-        return ` Saldo da Conta Corrente nº ${this.numero} Atualizado: ${saldo}\n Limite de saque disponível: ${this._limite}`
+
+    public mostrarSaldo() {
+        let saldo = this.calcularSaldo();
+        this.mostrarAlert(
+            ` Saldo da Conta Corrente nº ${this.numero} Atualizado: ${saldo}\n Limite da conta: ${this._limite}`)
     }
 }
 

@@ -23,14 +23,15 @@ let cliente03 = new Cliente('098.099.888-98', 'Augusto', '77899967-7898', false,
 let clienteCC = cliente03.conta[0] as ContaCorrente;
 
 
- console.log(clienteCC.depositar(100));
- console.log(clienteCC.depositar(100));
- console.log(clienteCC.depositar(100));
+ clienteCC.depositar(100);
+ clienteCC.depositar(100);
+ clienteCC.depositar(100);
 
 
 
- console.log(clienteCC.sacar(50));
 
- console.log(clienteCC.calcularSaldo());
+clienteCC.sacar(50);
 
- //# O resultado deverá apresentar um saldo de 250 e um limite disponível de 350
+ clienteCC.mostrarSaldo();
+
+ //# O resultado deverá apresentar um saldo de 250 e um limite disponível de 100

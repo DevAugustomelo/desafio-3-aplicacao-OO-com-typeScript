@@ -26,12 +26,11 @@ export abstract class Conta {
         return this._debitos;
     }
 
-    public depositar(valor: number) {
-        this.creditos.push(new Credito(valor, new Date()))
-        return `Valor de ${valor} Creditado.`
-    }
+    public depositar(valor: number) {}
 
     public sacar(valor: number) {}
+
+
 
 
 

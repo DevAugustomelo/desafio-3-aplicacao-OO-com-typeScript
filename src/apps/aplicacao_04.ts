@@ -18,22 +18,23 @@ import { ContaPoupanca } from "../models/contaPoupanca";
 
 
 
-let clienteCC = new Cliente('586.899.099.90', 'Augusto', '558199777-8899', true,
- new ContaCorrente('5000-02', 200))
+let cliente04 = new Cliente('586.899.099.90', 'Augusto', '558199777-8899', true,
+ [new ContaCorrente('5000-02', 200), new ContaPoupanca('8000-02', 0.01)]);
+
+ let contaCC = cliente04.conta[0] as ContaCorrente;
+ let contaCP = cliente04.conta[1] as ContaPoupanca;
 
 
- console.log(clienteCC.conta.depositar(1000));
+
+contaCC.depositar(1000);
 
 
+contaCP.depositar(1000);
 
- let clienteCP = new Cliente('444.555.666.70', 'Matheus', '99999999999', false, new ContaPoupanca('8000-02', 0.01))
+contaCC.transferir(contaCP, 500);
 
-console.log(clienteCP.conta.depositar(1000))
-
-console.log(clienteCC.conta.transferir(clienteCP.conta, 500))
-
-console.log(clienteCC.conta.calcularSaldo());
+contaCC.mostrarSaldo();
 
 
-console.log("Saldo em conta Poupança: ", clienteCP.conta.calcularSaldo())
+console.log("Saldo em conta Poupança: ", contaCP.calcularSaldo());
 
